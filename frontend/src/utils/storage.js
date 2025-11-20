@@ -146,8 +146,19 @@ export const saveTransaction = (transactionData) => {
  * Eliminar una transacción
  */
 export const deleteTransaction = (transactionId) => {
+  const currentUser = getCurrentUser()
+  if (!currentUser) {
+    return { success: false, message: 'Usuario no autenticado' }
+  }
+
   const allTransactions = localStorage.getItem(KEYS.TRANSACTIONS)
   const transactions = allTransactions ? JSON.parse(allTransactions) : []
+  
+  // Verificar que la transacción pertenece al usuario actual
+  const transactionToDelete = transactions.find(t => t.id === transactionId)
+  if (transactionToDelete && transactionToDelete.userId !== currentUser.id) {
+    return { success: false, message: 'No tienes permiso para eliminar esta transacción' }
+  }
   
   const filteredTransactions = transactions.filter(t => t.id !== transactionId)
   localStorage.setItem(KEYS.TRANSACTIONS, JSON.stringify(filteredTransactions))

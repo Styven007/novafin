@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { getCurrentUser, logout, getBalance, getTransactions } from '../utils/storage'
+import { getCurrentUser, logout, getBalance, getTransactions, deleteTransaction } from '../utils/storage'
 import { useEffect, useState } from 'react'
 import Modal from '../components/Modal'
 import TransactionForm from '../components/TransactionForm'
@@ -52,6 +52,27 @@ function Dashboard() {
     // Mostrar mensaje de éxito
     alert(`¡${newTransaction.tipo === 'ingreso' ? 'Ingreso' : 'Gasto'} registrado exitosamente!`)
   }
+
+  const handleDeleteTransaction = (transactionId) => {
+  if (!window.confirm('¿Estás seguro de que deseas eliminar esta transacción?')) {
+    return
+  }
+
+  const result = deleteTransaction(transactionId)
+
+  if (result.success) {
+    // Actualizar la lista de transacciones
+    setTransactions(prev => prev.filter(t => t.id !== transactionId))
+    
+    // Recalcular balance
+    const newBalance = getBalance()
+    setBalance(newBalance)
+    
+    alert('Transacción eliminada exitosamente')
+  } else {
+    alert('Error al eliminar: ' + result.message)
+  }
+}
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('es-CO', {
@@ -195,62 +216,84 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* Lista de Transacciones Recientes */}
-        {transactions.length > 0 ? (
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Transacciones Recientes</h3>
-            <div className="space-y-3">
-              {transactions.slice(0, 10).map(transaction => (
-                <div 
-                  key={transaction.id}
-                  className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition"
-                >
-                  <div className="flex items-center space-x-4">
-                    <div className={`p-2 rounded-lg ${
-                      transaction.tipo === 'ingreso' ? 'bg-green-100' : 'bg-red-100'
-                    }`}>
-                      <svg className={`w-5 h-5 ${
-                        transaction.tipo === 'ingreso' ? 'text-green-600' : 'text-red-600'
-                      }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                          d={transaction.tipo === 'ingreso' 
-                            ? "M7 11l5-5m0 0l5 5m-5-5v12" 
-                            : "M17 13l-5 5m0 0l-5-5m5 5V6"
-                          } 
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-800">{transaction.categoria}</p>
-                      <p className="text-sm text-gray-500">
-                        {transaction.descripcion || 'Sin descripción'} • {formatDate(transaction.fecha)}
-                      </p>
-                    </div>
-                  </div>
-                  <p className={`font-bold text-lg ${
-                    transaction.tipo === 'ingreso' ? 'text-green-600' : 'text-red-600'
-                  }`}>
-                    {transaction.tipo === 'ingreso' ? '+' : '-'}{formatCurrency(transaction.monto)}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
-            <div className="inline-block bg-indigo-100 rounded-full p-4 mb-4">
-              <svg className="w-12 h-12 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+{/* Lista de Transacciones Recientes */}
+{transactions.length > 0 ? (
+  <div className="bg-white rounded-2xl p-6 shadow-lg">
+    <h3 className="text-xl font-bold text-gray-800 mb-4">Transacciones Recientes</h3>
+    <div className="space-y-3">
+      {transactions.slice(0, 10).map(transaction => (
+        <div 
+          key={transaction.id}
+          className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition group"
+        >
+          <div className="flex items-center space-x-4 flex-1">
+            <div className={`p-2 rounded-lg ${
+              transaction.tipo === 'ingreso' ? 'bg-green-100' : 'bg-red-100'
+            }`}>
+              <svg className={`w-5 h-5 ${
+                transaction.tipo === 'ingreso' ? 'text-green-600' : 'text-red-600'
+              }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                  d={transaction.tipo === 'ingreso' 
+                    ? "M7 11l5-5m0 0l5 5m-5-5v12" 
+                    : "M17 13l-5 5m0 0l-5-5m5 5V6"
+                  } 
+                />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">
-              ¡Comienza a registrar tus finanzas!
-            </h3>
-            <p className="text-gray-600 mb-4">
-              Aún no tienes transacciones registradas. Empieza agregando tus ingresos y gastos.
-            </p>
+            <div className="flex-1">
+              <p className="font-semibold text-gray-800">{transaction.categoria}</p>
+              <p className="text-sm text-gray-500">
+                {transaction.descripcion || 'Sin descripción'} • {formatDate(transaction.fecha)}
+              </p>
+            </div>
           </div>
-        )}
+          
+          <div className="flex items-center space-x-3">
+            <p className={`font-bold text-lg ${
+              transaction.tipo === 'ingreso' ? 'text-green-600' : 'text-red-600'
+            }`}>
+              {transaction.tipo === 'ingreso' ? '+' : '-'}{formatCurrency(transaction.monto)}
+            </p>
+            
+            {/* Botón Eliminar */}
+            <button
+              onClick={() => handleDeleteTransaction(transaction.id)}
+              className="opacity-0 group-hover:opacity-100 transition-opacity p-2 text-red-500 hover:bg-red-50 rounded-lg"
+              title="Eliminar transacción"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    {transactions.length > 10 && (
+      <div className="mt-4 text-center">
+        <p className="text-sm text-gray-500">
+          Mostrando 10 de {transactions.length} transacciones
+        </p>
+      </div>
+    )}
+  </div>
+) : (
+  <div className="bg-white rounded-2xl p-8 shadow-lg text-center">
+    <div className="inline-block bg-indigo-100 rounded-full p-4 mb-4">
+      <svg className="w-12 h-12 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      </svg>
+    </div>
+    <h3 className="text-2xl font-bold text-gray-800 mb-2">
+      ¡Comienza a registrar tus finanzas!
+    </h3>
+    <p className="text-gray-600 mb-4">
+      Aún no tienes transacciones registradas. Empieza agregando tus ingresos y gastos.
+    </p>
+  </div>
+)}
       </main>
 
       {/* Modales */}
