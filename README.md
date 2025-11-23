@@ -37,11 +37,15 @@ NovaFin es una herramienta tecnológica diseñada para facilitar la educación f
 - ✅ Sistema de autenticación (Registro e Inicio de sesión)
 - ✅ Dashboard con resumen financiero en tiempo real
 - ✅ Registro de ingresos y gastos con categorías
+- ✅ **Historial completo con filtros avanzados** ← NUEVO
+- ✅ **Búsqueda por categoría o descripción** ← NUEVO
+- ✅ **Ordenamiento flexible (fecha, monto)** ← NUEVO
+- ✅ **Filtrado por rango de fechas** ← NUEVO
+- ✅ Eliminación de transacciones
 - ✅ Cálculo automático de balance
-- ✅ Categorías personalizables
+- ✅ Categorías predeterminadas
 - ✅ Almacenamiento local de datos
 - ✅ Interfaz responsiva y moderna
-- 🔄 Historial de transacciones (Próximamente)
 - 🔄 Gráficos y estadísticas (Próximamente)
 - 🔄 Recursos educativos financieros (Próximamente)
 
