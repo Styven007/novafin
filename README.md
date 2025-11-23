@@ -131,10 +131,11 @@ NovaFin/
 - [x] Registro de transacciones
 - [x] Almacenamiento local
 
-### Fase 2: Funcionalidades Core 🔄 (En progreso)
-- [ ] Historial completo de transacciones
-- [ ] Filtros y búsqueda
-- [ ] Eliminar y editar transacciones
+### Fase 2: Funcionalidades Core ✅ (Completado)
+- [x] Historial completo de transacciones
+- [x] Filtros y búsqueda
+- [x] Eliminar transacciones
+- [ ] Editar transacciones
 - [ ] Categorías personalizables
 
 ### Fase 3: Visualización 📊 (Próximamente)
