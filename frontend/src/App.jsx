@@ -3,6 +3,7 @@ import Login from 'c:/Users/reyes/Documents/NovaFin/frontend/src/pages/login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import History from './pages/History'
+import Statistics from './pages/Statistics'
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/history" element={<History />} />
+
+        <Route path="/statistics" element={<Statistics />} /> 
         
         {/* Ruta 404 - cualquier otra ruta no definida */}
         <Route path="*" element={<Navigate to="/login" replace />} />
