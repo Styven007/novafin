@@ -21,40 +21,48 @@ NovaFin es una herramienta tecnológica que facilita la educación financiera me
 - Base de Datos: MongoDB
 
 
-# 💰 NovaFin
+#  NovaFin
 
 **Aplicación web para promover el fortalecimiento de las finanzas personales en jóvenes universitarios**
 
 ![Estado del Proyecto](https://img.shields.io/badge/Estado-En%20Desarrollo-yellow)
 ![Licencia](https://img.shields.io/badge/Licencia-MIT-blue)
 
-## 📋 Descripción
+##  Descripción
 
 NovaFin es una herramienta tecnológica diseñada para facilitar la educación financiera entre estudiantes universitarios de la Corporación Universitaria Reformada. La aplicación permite a los usuarios gestionar sus finanzas personales de manera efectiva a través de una interfaz intuitiva y moderna.
 
-## ✨ Características
+
+
+##  Características
 
 - ✅ Sistema de autenticación (Registro e Inicio de sesión)
 - ✅ Dashboard con resumen financiero en tiempo real
 - ✅ Registro de ingresos y gastos con categorías
-- ✅ **Historial completo con filtros avanzados** ← NUEVO
-- ✅ **Búsqueda por categoría o descripción** ← NUEVO
-- ✅ **Ordenamiento flexible (fecha, monto)** ← NUEVO
-- ✅ **Filtrado por rango de fechas** ← NUEVO
+- ✅ Historial completo con filtros avanzados
+- ✅ Búsqueda por categoría o descripción
+- ✅ Ordenamiento flexible (fecha, monto)
+- ✅ Filtrado por rango de fechas
+- ✅ **Estadísticas con gráficos interactivos** ← NUEVO
+- ✅ **Gráfico de pastel: Distribución de gastos** ← NUEVO
+- ✅ **Gráfico de barras: Top categorías** ← NUEVO
+- ✅ **Gráfico de línea: Evolución temporal** ← NUEVO
+- ✅ **Análisis automático de patrones financieros** ← NUEVO
 - ✅ Eliminación de transacciones
 - ✅ Cálculo automático de balance
 - ✅ Categorías predeterminadas
 - ✅ Almacenamiento local de datos
 - ✅ Interfaz responsiva y moderna
-- 🔄 Gráficos y estadísticas (Próximamente)
+- 🔄 Editar transacciones (Próximamente)
 - 🔄 Recursos educativos financieros (Próximamente)
 
-## 🛠️ Tecnologías
+##  Tecnologías
 
-### Frontend
+**Frontend:**
 - **React** 18.3 - Librería de JavaScript para interfaces de usuario
 - **React Router** 6.x - Navegación entre páginas
 - **Tailwind CSS** 3.4 - Framework CSS para diseño
+- **Recharts** 3.5 - Librería de gráficos interactivos ← NUEVO
 - **Vite** 5.x - Build tool ultrarrápido
 
 ### Almacenamiento
@@ -65,7 +73,7 @@ NovaFin es una herramienta tecnológica diseñada para facilitar la educación f
 - **MongoDB** - Base de datos
 - **JWT** - Autenticación segura
 
-## 🚀 Instalación y Uso
+##  Instalación y Uso
 
 ### Prerrequisitos
 - Node.js (v20 o superior)
@@ -96,7 +104,7 @@ npm run dev
 http://localhost:5173
 ```
 
-## 📁 Estructura del Proyecto
+##  Estructura del Proyecto
 ```
 NovaFin/
 │
@@ -123,51 +131,52 @@ NovaFin/
 └── .gitignore
 ```
 
-## 🎯 Roadmap
+##  Roadmap
 
-### Fase 1: MVP ✅ (Actual)
+### Fase 1: MVP  (Actual)
 - [x] Autenticación básica
 - [x] Dashboard con balance
 - [x] Registro de transacciones
 - [x] Almacenamiento local
 
-### Fase 2: Funcionalidades Core ✅ (Completado)
+### Fase 2: Funcionalidades Core  (Completado)
 - [x] Historial completo de transacciones
 - [x] Filtros y búsqueda
 - [x] Eliminar transacciones
 - [ ] Editar transacciones
 - [ ] Categorías personalizables
 
-### Fase 3: Visualización 📊 (Próximamente)
-- [ ] Gráficos de gastos por categoría
-- [ ] Estadísticas mensuales
-- [ ] Comparativas de periodos
-- [ ] Exportar reportes
+### Fase 3: Visualización  (Completado)
+- [x] Gráficos de gastos por categoría
+- [x] Estadísticas automáticas
+- [x] Análisis de patrones financieros
+- [x] Gráfico de evolución temporal
+- [x] Top categorías de gasto
 
-### Fase 4: Backend y Base de Datos 💾 (Futuro)
+### Fase 4: Backend y Base de Datos (Futuro)
 - [ ] API REST con Node.js
 - [ ] Base de datos MongoDB
 - [ ] Autenticación con JWT
 - [ ] Sincronización en la nube
 
-### Fase 5: Características Avanzadas 🚀 (Futuro)
+### Fase 5: Características Avanzadas  (Futuro)
 - [ ] Recursos educativos financieros
 - [ ] Metas de ahorro
 - [ ] Presupuestos mensuales
 - [ ] Notificaciones y recordatorios
 
-## 👨‍💻 Autor
+## Autor
 
 **Stiven Reyes Bucles**
 - Universidad: Corporación Universitaria Reformada
 - Programa: Ingeniería Informática
 - Proyecto de Grado - 2024
 
-## 📄 Licencia
+##  Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 
-## 🤝 Contribuciones
+## Contribuciones
 
 Las contribuciones son bienvenidas. Por favor:
 1. Fork el proyecto
@@ -176,10 +185,10 @@ Las contribuciones son bienvenidas. Por favor:
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
-## 📞 Contacto
+## Contacto
 
 Para preguntas o sugerencias sobre el proyecto, puedes contactarme a través de GitHub.
 
 ---
 
-⭐ Si te gusta este proyecto, no olvides darle una estrella en GitHub
+Si te gusta este proyecto, no olvides darle una estrella en GitHub
